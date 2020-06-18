@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Card from './Card';
 import renderer from 'react-test-renderer';
-import store from './store'
+import '@testing-library/jest-dom/extend-expect';
 
-describe('App component', () => {
+describe('Card component', () => {
     // Smoke testing
     it('renders without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<App store={store}/>, div);
+        ReactDOM.render(<Card />, div);
         ReactDOM.unmountComponentAtNode(div)
     });
 
     // Snapshot testing
     it('renders the UI as expected', () => {
         const tree = renderer
-            .create(<App store={store}/>)
+            .create(<Card key="id" title="title" content="content" />)
             .toJSON();
         expect(tree).toMatchSnapshot()
     });
